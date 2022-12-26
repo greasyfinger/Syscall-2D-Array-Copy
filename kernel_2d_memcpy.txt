@@ -1,0 +1,9 @@
+SYSCALL_DEFINE3(kernel_2d_memcpy, float **, src, float **, dest, int, len)
+{
+    float buffer[3][3];
+    if (__copy_from_user(buffer, src, (len) * (len) * sizeof(float)))
+        return -EFAULT;
+    if (__copy_to_user(dest, buffer, (len) * (len) * sizeof(float)))
+        return -EFAULT;
+    return 0;
+}
